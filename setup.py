@@ -1,9 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='django-simple-history-field-track',
     version='0.0.1',
     description='Additional field tracker to django-simple-history with admin integration',
+    packages=find_packages(),
     long_description='\n'.join((
         open('README.rst').read(),
     )),
