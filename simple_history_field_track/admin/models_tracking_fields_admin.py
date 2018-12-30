@@ -45,3 +45,5 @@ class ModelsTrackingFieldsAdmin(admin.ModelAdmin):
 
     def get_tracking_fields(self, instance):
         return ', '.join(instance.tracking_fields)
+
+    get_tracking_fields.short_description = 'فیلد‌های قابل نمایش در تاریخچه'
