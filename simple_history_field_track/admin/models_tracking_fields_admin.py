@@ -20,14 +20,17 @@ class FieldSelectForm(forms.ModelForm):
     meta_options = [content_type.model_class()._meta for content_type in valid_content_types]
 
     tracking_fields = forms.MultipleChoiceField(
-        choices=[(meta.model_name.lower() + '|' + field.name, meta.verbose_name + ' | ' + str(field.verbose_name)) for meta in meta_options
+        choices=[(meta.model_name.lower() + '|' + field.name, meta.verbose_name + ' | ' + str(field.verbose_name)) for
+                 meta in meta_options
                  for field in meta.local_fields]
     )
 
     def clean(self):
         data = self.cleaned_data
+        if not data['tracking_fields']:
+            raise forms.ValidationError("Tracking fields shouldn't be empty")
         if not all([field.split('|')[0] == data['model_name'] for field in data['tracking_fields']]):
-            raise forms.ValidationError('Error')
+            raise forms.ValidationError('Invalid tracking fields')
 
     class Meta:
         model = ModelsTrackingFields
@@ -37,3 +40,8 @@ class FieldSelectForm(forms.ModelForm):
 @admin.register(ModelsTrackingFields)
 class ModelsTrackingFieldsAdmin(admin.ModelAdmin):
     form = FieldSelectForm
+
+    list_display = ('model_name', 'get_tracking_fields')
+
+    def get_tracking_fields(self, instance):
+        return ', '.join(instance.tracking_fields)
