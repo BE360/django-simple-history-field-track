@@ -25,6 +25,10 @@ class FieldSelectForm(forms.ModelForm):
                              for field in meta.local_fields],
                     required=False
                 )
+        else:
+            self.fields['tracking_fields'] = forms.MultipleChoiceField(
+                required=False
+            )
 
     valid_content_types = list(filter(lambda ct: is_valid_model(ct), ContentType.objects.all()))
 
