@@ -6,6 +6,8 @@ def should_record_history(wrapped_func):
     def wrapper(*args, **kwargs):
         if len(args) > 0:
             self = args[0]
+            if hasattr(self, 'skip_history_when_saving'):
+                del self.skip_history_when_saving
 
             if not self.id:
                 self.skip_history_when_saving = True
