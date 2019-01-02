@@ -1,6 +1,7 @@
 from simple_history.admin import SimpleHistoryAdmin
 from simple_history_field_track.models import ModelsTrackingFields
-from django_plus.fa.templatetags.fa_tags import fa_datetime_filter
+from simple_history_field_track.templatetags.simple_history_admin_list import fa_datetime_filter
+
 
 class SimpleAdminDiffHistory(SimpleHistoryAdmin):
     object_history_template = "simple_history_field_track/object_history.html"
