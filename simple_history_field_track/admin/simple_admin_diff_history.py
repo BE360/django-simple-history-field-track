@@ -44,6 +44,8 @@ class SimpleAdminDiffHistory(SimpleHistoryAdmin):
             action.changed_fields = ''
             if index < len(action_list) - 1:
                 action.changed_fields = self.compare(action, action_list[index + 1])
+            else:
+                action.changed_fields = '-'
             action_list[index] = action
 
         action_list = list(filter(lambda x: x.changed_fields or x.history_type == '+', action_list))
