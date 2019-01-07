@@ -1,2 +1,3 @@
+from .simple_history_admin import SimpleHistoryAdmin
 from .simple_admin_diff_history import SimpleAdminDiffHistory
 from .models_tracking_fields_admin import ModelsTrackingFieldsAdmin

@@ -1,4 +1,4 @@
-from simple_history.admin import SimpleHistoryAdmin
+from simple_history_field_track.admin import SimpleHistoryAdmin
 from simple_history_field_track.models import ModelsTrackingFields
 from simple_history_field_track.templatetags.simple_history_admin_list import fa_datetime_filter
 
