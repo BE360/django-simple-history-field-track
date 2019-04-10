@@ -12,6 +12,11 @@ def is_valid_model(content_type):
 class FieldSelectForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FieldSelectForm, self).__init__(*args, **kwargs)
+        self.valid_content_types = list(filter(lambda ct: is_valid_model(ct), ContentType.objects.all()))
+        self.fields['model_name'] = forms.ChoiceField(
+            choices=[(content_type.model.lower(), content_type.model_class()._meta.verbose_name) for content_type in
+                     self.valid_content_types]
+        )
         instance = kwargs.get('instance', None)
         if instance:
             if hasattr(instance, 'model_name'):
@@ -29,13 +34,6 @@ class FieldSelectForm(forms.ModelForm):
             self.fields['tracking_fields'] = forms.MultipleChoiceField(
                 required=False
             )
-
-    valid_content_types = list(filter(lambda ct: is_valid_model(ct), ContentType.objects.all()))
-
-    model_name = forms.ChoiceField(
-        choices=[(content_type.model.lower(), content_type.model_class()._meta.verbose_name) for content_type in
-                 valid_content_types]
-    )
 
     def clean(self):
         data = self.cleaned_data
