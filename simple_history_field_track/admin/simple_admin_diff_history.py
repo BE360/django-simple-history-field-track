@@ -27,8 +27,8 @@ class SimpleAdminDiffHistory(SimpleHistoryAdmin):
                 except KeyError:
                     old.update({k: v})
 
-            return '، '.join(set(map(lambda x: self.model._meta.get_field(x).verbose_name, old)) | set(
-                map(lambda x: self.model._meta.get_field(x).verbose_name, new)))
+            return '، '.join(set(map(lambda x: str(self.model._meta.get_field(x).verbose_name), old)) | set(
+                map(lambda x: str(self.model._meta.get_field(x).verbose_name), new)))
         except ModelsTrackingFields.DoesNotExist:
             return None
 
