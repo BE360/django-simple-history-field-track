@@ -9,9 +9,9 @@ def should_record_history(wrapped_func):
             if hasattr(self, 'skip_history_when_saving'):
                 del self.skip_history_when_saving
 
-            if self.id:
+            if self.pk:
                 query_set = HistoryManager(self._meta.model).get_queryset()
-                previous_state = query_set.get(id=self.id)
+                previous_state = query_set.get(id=self.pk)
 
                 model_fields = [f.name for f in self._meta.get_fields()]
                 try:

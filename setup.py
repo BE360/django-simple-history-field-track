@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-simple-history-field-track',
-    version='0.0.13',
+    version='0.0.14',
     description='Additional field tracker to django-simple-history with admin integration',
     packages=find_packages(),
     long_description='\n'.join((
