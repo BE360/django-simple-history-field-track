@@ -10,7 +10,7 @@ class ModelsTrackingFields(models.Model):
 
     tracking_fields = ArrayField(
         models.CharField(max_length=128),
-        default=list(),
+        default=list,
         verbose_name='فیلد‌های قابل نمایش در تاریخچه'
     )
 
