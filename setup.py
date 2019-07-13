@@ -14,7 +14,7 @@ setup(
     url='',
     install_requires=[
         'jdatetime',
-        'django-simple-history==2.5.1'
+        'django-simple-history>=2.5.1'
     ],
     classifiers=[
         "Development Status :: Development",
